@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}All Messages{% endblock %}
+
+{% block content %}
+    <h1>All Messages</h1>
+    <ul>
+        {% for message in messages %}
+        <li>
+            <h3>Subject: {{ message.subject }}</h3>
+            <p>Sent by: {{ message.sender.username }}</p>
+            <p>Sent at: {{ message.created_at|date:"Y-m-d H:i:s" }}</p>
+            <h3><a href="{% url 'message_detail' message.id %}">Open</a></h3>
+        </li>
+        {% empty %}
+        <li>No messages found.</li>
+        {% endfor %}
+    </ul>
+
+    {% for message in messages %}
+    <div id="message{{ forloop.counter }}" style="display: none; margin-top: 20px;">
+        <h3>Sent by: {{ message.sender.username }}</h3>
+        <p>Message: {{ message.message }}</p>
+        <a href="#" onclick="toggleMessage('message{{ forloop.counter }}'); return false;">Close</a>
+    </div>
+    {% endfor %}
+
+    <script>
+        function toggleMessage(messageId) {
+            var messageDiv = document.getElementById(messageId);
+            if (messageDiv.style.display === 'none') {
+                messageDiv.style.display = 'block';
+            } else {
+                messageDiv.style.display = 'none';
+            }
+        }
+    </script>
+{% endblock %}

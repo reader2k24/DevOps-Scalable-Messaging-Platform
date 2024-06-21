@@ -1,0 +1,73 @@
+/* profile.css */
+
+/* Form styles */
+.profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="date"],
+.profile-form textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.profile-form textarea {
+    height: 100px;
+}
+
+.profile-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.profile-form button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.profile-form p {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Profile information styles */
+.profile-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile-info strong {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+}
+
+.profile-info img {
+    max-width: 200px;
+    border-radius: 5px;
+    margin-top: 10px;
+}

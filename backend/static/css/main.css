@@ -1,0 +1,7 @@
+/* main.css */
+
+/* Подключение содержимого других CSS файлов */
+@import 'profile.css';
+@import 'home.css';
+@import 'login.css';
+@import 'styles.css';

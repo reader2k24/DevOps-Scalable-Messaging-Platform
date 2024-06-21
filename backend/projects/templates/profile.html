@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>User Profile</h2>
+  
+  <div class="profile-info">
+    <div style="text-align: center;">
+      <h3>{{ user.username }}</h3>
+      <h3>{{ user.email }}</h3>
+    </div>
+    
+    {% if profile %}
+      <form method="post" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+        <label for="bio">Bio:</label><br>
+        <textarea id="bio" name="bio" rows="4">{{ profile.bio }}</textarea><br><br>
+        
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location" value="{{ profile.location }}"><br><br>
+        
+        <label for="birth_date">Birth Date:</label><br>
+        <input type="date" id="birth_date" name="birth_date" value="{% if profile.birth_date %}{{ profile.birth_date|date:"Y-m-d" }}{% endif %}"><br><br>
+        
+        <label for="photo">Photo:</label><br>
+        {% if profile.photo %}
+          <img src="{{ profile.photo.url }}" alt="Profile Photo"><br><br>
+        {% else %}
+          <p>No photo uploaded</p><br>
+        {% endif %}
+        <input type="file" id="photo" name="photo"><br><br>
+        
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number" value="{{ profile.phone_number }}"><br><br>
+        
+        <button type="submit">Save Changes</button>
+      </form>
+    {% else %}
+      <p>No profile found.</p>
+    {% endif %}
+  </div>
+{% endblock %}

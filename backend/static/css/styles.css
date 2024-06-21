@@ -1,0 +1,88 @@
+/* styles.css */
+
+/* Общие стили для всех страниц */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для заголовков */
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Стили для навигации */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Добавляем тень для эффекта поднятия */
+    position: relative; /* Чтобы можно было позиционировать элементы внутри */
+}
+
+header nav ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона */
+}
+
+header nav ul li a:hover {
+    background-color: #555;
+    border-radius: 3px; /* Закругление углов при наведении */
+}
+
+/* Стили для основного контента */
+main {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+/* Стили для футера */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+    position: relative; /* Поддерживаем позицию футера относительно содержимого страницы */
+    clear: both; /* Очищаем обтекание содержимым */
+}
+
+.edit, .delete {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+.edit {
+    background-color: blue;
+}
+.delete {
+    background-color: red;
+}
+.delete-form {
+    display: inline-block;
+}
+

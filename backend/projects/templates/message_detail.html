@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Message Detail{% endblock %}
+
+{% block content %}
+    <h1>{{ message.subject }}</h1>
+    <p>{{ message.message }}</p>
+    <p>Sent by: {{ message.sender.username }}</p>
+    <p>Sent at: {{ message.created_at }}</p>
+    <a href="{% url 'message_list' %}">Back to Messages</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}My Messages{% endblock %}
+
+{% block content %}
+    <style>
+        .edit-btn, .delete-btn {
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+    </style>
+
+    <h1>My Messages</h1>
+    <ul>
+        {% for message in messages %}
+        <li>
+            <p>Subject: {{ message.subject }}</p>
+            <p>Sent at: {{ message.created_at }}</p>
+            <a href="{% url 'message_detail' message.id %}" class="edit-btn">Open</a>
+            <a href="{% url 'message_update' message.id %}" class="edit-btn">Edit</a>
+            <form action="{% url 'message_delete' message.id %}" method="post" class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this message?')">Delete</button>
+            </form>
+        </li>
+        {% empty %}
+        <li>No messages found.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'message_create' %}" class="edit-btn">Create New Message</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Message{% endblock %}
+
+{% block content %}
+    <h1>Delete Message</h1>
+    <p>Are you sure you want to delete "{{ message.subject }}"?</p>
+    <form action="{% url 'message_delete' message.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <a href="{% url 'message_list' %}">Cancel</a>
+    </form>
+{% endblock %}
