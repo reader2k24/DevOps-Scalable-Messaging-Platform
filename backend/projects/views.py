@@ -64,13 +64,14 @@ def register(request):
             Profile.objects.create(user=user)
             messages.success(request, 'Registration successful!')
             new_user = authenticate(username=form.cleaned_data['username'],
-                                    password=form.cleaned_data['password1'],
-                                    )
-            login(request, new_user)
-            return redirect('profile')
+                                    password=form.cleaned_data['password1'])
+            if new_user is not None:
+                login(request, new_user)
+                return redirect('profile')
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form': form})
+
 
 @login_required
 def profile(request):
