@@ -31,10 +31,10 @@
 
 #### Установка и настройка проекта:
 
-1. **Клонирование репозитория**:
+1. **Создание и активация виртуального окружения Python**:
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
 2. **Установка зависимостей**:
