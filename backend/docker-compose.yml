@@ -26,6 +26,17 @@ services:
       - db
       - redis
 
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - /static/css:/code/static/css
+      - /projects/templates:/code/templates
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
+
+
 volumes:
   postgres_data:
     external: false
