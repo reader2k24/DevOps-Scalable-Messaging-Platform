@@ -5,15 +5,24 @@ from django.contrib import messages
 from .forms import ProfileForm, UserRegistrationForm, MessageForm
 from .models import Profile, Message
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 
 @login_required
 def message_list(request):
-    messages = Message.objects.filter(sender=request.user).order_by('-created_at')
+    cache_key = f'message_list_{request.user.id}'
+    messages = cache.get(cache_key)
+    if not messages:
+        messages = Message.objects.filter(sender=request.user).order_by('-created_at')
+        cache.set(cache_key, messages, 60 * 15)  # Кэширование на 15 минут
     return render(request, 'message_list.html', {'messages': messages})
 
 @login_required
 def message_detail(request, message_id):
-    message = get_object_or_404(Message, id=message_id)
+    cache_key = f'message_detail_{message_id}'
+    message = cache.get(cache_key)
+    if not message:
+        message = get_object_or_404(Message, id=message_id)
+        cache.set(cache_key, message, 60 * 15)  # Кэширование на 15 минут
     context = {
         'message': message,
     }
@@ -27,6 +36,7 @@ def message_create(request):
             message = form.save(commit=False)
             message.sender = request.user
             message.save()
+            cache.delete(f'message_list_{request.user.id}')
             return redirect('message_list')
     else:
         form = MessageForm()
@@ -40,6 +50,8 @@ def message_update(request, message_id):
         form = MessageForm(request.POST, instance=message)
         if form.is_valid():
             form.save()
+            cache.delete(f'message_list_{request.user.id}')
+            cache.delete(f'message_detail_{message_id}')
             return redirect('message_list')
     else:
         form = MessageForm(instance=message)
@@ -51,6 +63,8 @@ def message_delete(request, message_id):
     message = get_object_or_404(Message, id=message_id, sender=request.user)
     if request.method == 'POST':
         message.delete()
+        cache.delete(f'message_list_{request.user.id}')
+        cache.delete(f'message_detail_{message_id}')
         return redirect('message_list')
     
     return render(request, 'message_confirm_delete.html', {'message': message})
